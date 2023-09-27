@@ -33,18 +33,14 @@ class Solution(object):
             while curr_node:
                 stack.append((curr_node, curr_depth))
                 curr_node = curr_node.left
-                if curr_node:
-                    curr_depth += 1
-                    if curr_depth > max_depth:
-                        max_depth = curr_depth
-            try:
-                curr_node, curr_depth = stack.pop()
-            except IndexError:
-                break
-            curr_node = curr_node.right
-            if curr_node:
                 curr_depth += 1
-                if curr_depth > max_depth:
-                    max_depth = curr_depth
+            curr_depth -= 1
+            if curr_depth > max_depth:
+                max_depth = curr_depth
+            if len(stack) == 0:
+                break
+            curr_node, curr_depth = stack.pop()
+            curr_node = curr_node.right
+            curr_depth += 1
 
         return max_depth
